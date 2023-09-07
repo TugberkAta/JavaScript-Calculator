@@ -1,38 +1,38 @@
-let firstNumber= " " ; 
-let secondNumber ;
-let Result = 0 ;
-let lastResult = 0;
-let operator = "";
-let toggle = true;
+let result = 0 ;
+let lastString = ""
 
-function subtractFunc(firstNumber,secondNumber){
-    return Number(secondNumber)- Number(firstNumber)
-}
-
-function addFunc(firstNumber,secondNumber){
-    return Number(secondNumber)+ Number(firstNumber)
- }
-
- function multiplyFunc(firstNumber,secondNumber){
-    return Number(secondNumber)* Number(firstNumber)
- }
- 
- function divideFunc(firstNumber,secondNumber){
-    return Number(secondNumber)/Number(firstNumber)
- }
-
- function operate(firstNumber, secondNumber, operator) {
-    if (operator === "subtract") {
-      return subtractFunc(firstNumber, secondNumber);
-    } else if (operator === "add") {
-      return addFunc(firstNumber, secondNumber);
-    } else if (operator === "multiply") {
-      return multiplyFunc(firstNumber, secondNumber);
-    } else if (operator === "divide") {
-      return divideFunc(firstNumber, secondNumber);
-    } else if (operator === ""){
-        return lastResult
-    }
+function calculate(numbers) {
+    numbers.forEach((e, i) => {
+      if (e !== "*" && e !== "/" && e !== "-" && e !== "+") {
+        numbers[i] = Number(e);
+      }
+    });
+  
+    numbers.forEach((e, i) => {
+      if (e === "*") {
+        result = numbers[i - 1] * numbers[i + 1];
+        numbers.splice(i - 1, 3, result);
+      }
+    });
+  
+    numbers.forEach((e, i) => {
+      if (e === "/") {
+        result = numbers[i - 1] / numbers[i + 1];
+        numbers.splice(i - 1, 3, result);
+      }
+    });
+  
+    numbers.forEach((e, i) => {
+      if (e === "-" || e === "+") {
+        if (e === "-") {
+          result = numbers[i - 1] - numbers[i + 1];
+        } else {
+          result = numbers[i - 1] + numbers[i + 1];
+        }
+        numbers.splice(i - 1, 3, result);
+      }
+    });
+    return result
   }
 
 
@@ -57,116 +57,109 @@ const eightButton = document.getElementById("eight");
 const nineButton = document.getElementById("nine");
 const zeroButton = document.getElementById("zero");
 const operateButton = document.getElementById("equals-operator")
+const dotButton = document.getElementById("dot")
 
 screenText.className = "screen-number"
 
+
 screen.append(screenText)
 
+
 addButton.addEventListener("click",(e)=>{
-    secondNumber = firstNumber
-    firstNumber = ""
-    addText("+")
-    operator = "add"
-    console.log(operator)
+    if(lastString === " * " || lastString === " - " || lastString === " + " || lastString === " / " ){
+        return 0
+    }
+    addText(" + ")
 });
 
 subtractButton.addEventListener("click",(e)=>{
-    secondNumber = firstNumber
-    firstNumber = ""
-    addText("-")
-    operator = "subtract"
-    console.log(operator)
+    if(lastString === " * " || lastString === " - " || lastString === " + " || lastString === " / " ){
+        return 0
+    }
+    addText(" - ")
 });
 
 divideButton.addEventListener("click",(e)=>{
-    secondNumber = firstNumber
-    firstNumber = ""
-    addText("/")
-    operator = "divide"
-    console.log(operator)
+    if(lastString === " * " || lastString === " - " || lastString === " + " || lastString === " / " ){
+        return 0
+    }
+    addText(" / ")
 });
 
 multiplyButton.addEventListener("click",(e)=>{
-    secondNumber = firstNumber
-    firstNumber = ""
-    addText("*")
-    operator = "multiply"
-    console.log(operator)
+    if(lastString === " * " || lastString === " - " || lastString === " + " || lastString === " / " ){
+        return 0
+    }
+    addText(" * ")
 });
 
 oneButton.addEventListener("click",(e)=>{
     addText("1")
-    firstNumber = firstNumber + "1"
 }); 
 
 twoButton.addEventListener("click",(e)=>{
     addText("2")
-    firstNumber = firstNumber + "2"
 }); 
 
 threeButton.addEventListener("click",(e)=>{
     addText("3")
-    firstNumber = firstNumber + "3"
 }); 
 
 fourButton.addEventListener("click",(e)=>{
     addText("4")
-    firstNumber = firstNumber + "4"
 }); 
 
 fiveButton.addEventListener("click",(e)=>{
     addText("5")
-    firstNumber = firstNumber + "5"
 }); 
 
 sixButton.addEventListener("click",(e)=>{
     addText("6")
-    firstNumber = firstNumber + "6"
 }); 
 
 sevenButton.addEventListener("click",(e)=>{
     addText("7")
-    firstNumber = firstNumber + "7"
 }); 
 
 eightButton.addEventListener("click",(e)=>{
     addText("8")
-    firstNumber = firstNumber + "8"
 }); 
 
 nineButton.addEventListener("click",(e)=>{
     addText("9")
-    firstNumber = firstNumber + "9"
 }); 
 
 zeroButton.addEventListener("click",(e)=>{
     addText("0")
-    firstNumber = firstNumber + "0"
+}); 
+
+dotButton.addEventListener("click",(e)=>{
+    addText(".")
 }); 
 
 clearButton.addEventListener("click",(e)=>{
     screenText.innerHTML= "";
-    firstNumber = "";
-    secondNumber = "";
-    operator = "";
-    toggle = true
+    result = ""
+    lastString = ""
 });
 
 operateButton.addEventListener("click",(e)=>{
-    if (toggle === true){
-    Result = operate(firstNumber, secondNumber, operator)
-    toggle = false
+    if(lastString === " * " || lastString === " - " || lastString === " + " || lastString === " / " ){
+        return 0
     }
-    else{
-    Result = operate(firstNumber, lastResult, operator)
-    }
+    calculate(screenText.textContent.split(" "));
+    console.log(screenText.textContent.split(" "))
     screenText.innerHTML= "";
-    addText(Result)
-    lastResult = Result
-    Result = 0
-    operator = ""
+    lastString = ""
+    screenText.textContent += result
 });
 
 function addText(string){
+    if (lastString === string && (string === " * " || string === " - " || string === " + " || string === " / " ) 
+    || lastString === "" && (string === " * " || string === " - " || string === " + " || string === " / " ) ){
+        return 0
+    }
     screenText.textContent = screenText.textContent + string
+    lastString = string
 }
+
