@@ -23,15 +23,18 @@ function calculate(numbers) {
     });
   
     numbers.forEach((e, i) => {
-      if (e === "-" || e === "+") {
+        if (e === "+") {
+          result = numbers[i - 1] + numbers[i + 1];
+          numbers.splice(i - 1, 3, result);
+        }
+      });
+    
+      numbers.forEach((e, i) => {
         if (e === "-") {
           result = numbers[i - 1] - numbers[i + 1];
-        } else {
-          result = numbers[i - 1] + numbers[i + 1];
+          numbers.splice(i - 1, 3, result);
         }
-        numbers.splice(i - 1, 3, result);
-      }
-    });
+      });
     return result
   }
 
@@ -150,7 +153,6 @@ operateButton.addEventListener("click",(e)=>{
     calculate(screenText.textContent.split(" "));
     console.log(screenText.textContent.split(" "))
     screenText.innerHTML= "";
-    lastString = ""
     screenText.textContent += result
 });
 
