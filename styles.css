@@ -1,8 +1,8 @@
 *{
     flex: 0 0 1;
-    background-color: #89BD9E;
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: white;
 }
 
 p{
@@ -16,7 +16,6 @@ p{
     align-items: center;
     height: 100vh;
     background-color: whitesmoke;
-    
 }
 
 .main-board{
@@ -27,8 +26,8 @@ p{
     border-radius: 5%;
     width: 450px;
     height: 580px;
-    background-color: #89BD9E;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    background-color: white;
+    box-shadow: 10px 10px rgba(0, 0, 0, 0.173)
 }
 
 #screen{
@@ -38,18 +37,20 @@ p{
     height: 120px;
     width: 420px;
     margin-top: 20px;
-    background-color: #F0C987;
+    background-color: black;
     font-size: 32px;
 }
 
 .screen-number{
     margin-left: 10px;
+    color: white;
 }
 
 .main-pad{
     display: flex;
     margin-top: 20px;
     gap: 15px;
+    background-color: white;
 }
 
 #clear-button{
@@ -66,14 +67,14 @@ p{
     border-radius: 4%;
     width: 300px;
     height: 400px;
-    background-color: #8B1E3F;
+    background-color: gray;
 }
 
 .number-pad-top{
     display: flex;
     justify-content: center;
     margin-top: 10px;
-    background-color: #8B1E3F;
+    background-color: inherit;
 }
 
 .number-pad-bottom{
@@ -83,7 +84,7 @@ p{
     gap: 10px;
     flex-wrap: wrap;
     margin-top: 10px;
-    background-color: #8B1E3F;
+    background-color: inherit;
 }
 
 .numpad-lastrow{
@@ -102,7 +103,7 @@ p{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: #028090;
+    background-color: gray;
     width: 80px;
     border-radius: 10px;
 }
